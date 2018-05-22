@@ -32,3 +32,22 @@ nodes. Note the next node of current node and make the previous node as the
 successor of next node and move on. `reverse()`. In recursive approach too,
 the same logic applies `reverseRecursive()`. 
 
+#### Merge two linked lists which are already in ascending order
+We can choose between the smallest element in each head of the linked lists and
+create a new list by popping them in steps: `mergeAscendingOrder()`
+
+#### Find the middle node of the list
+We let two references run through the list, one at the speed twice of the other
+as in [Tortoise-Hare algorithm](https://en.wikipedia.org/wiki/Cycle_detection). 
+When the fastest reference reaches the end of the list, the slowest one will refer
+to the middle of the list. `middle()`
+
+#### Sort the linked list
+This is usually done by merge sort `mergeSort()`
+
+#### Remove the duplicates in an unordered list
+At each step while iterating through the list, have a reference to that node and
+let another reference run from the next node to the end, comparing the values on 
+every step. If there's a duplicate, remove it. `removeDuplicates()` 
+
+

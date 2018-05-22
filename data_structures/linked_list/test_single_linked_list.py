@@ -2,43 +2,9 @@ import unittest
 
 from data_structures.linked_list.single_linked_list import Node, toString, getLength, getLengthRecursive, contains, \
     containsRecursive, findNthFromLast, isAscending, isDescending, reverse, equals, reverseRecursive, \
-    mergeAscendingOrder, middle, mergeSort, isPalindrome
-
-
-def random_list():
-    return Node(25, Node(12, Node(35, Node(6, Node(15, Node(45))))))
-
-
-def ascending_list():
-    return Node(10, Node(20, Node(30, Node(40, Node(50, Node(60, Node(70)))))))
-
-def palindrome_list():
-    return Node(10, Node(20, Node(30, Node(40, Node(30, Node(20, Node(10)))))))
-
-
-def another_ascending_list():
-    return Node(12, Node(22, Node(33, Node(45, Node(53, Node(61, Node(78)))))))
-
-
-def combined_ascending_list():
-    return Node(10,
-                Node(12,
-                     Node(20,
-                          Node(22,
-                               Node(30,
-                                    Node(33,
-                                         Node(40,
-                                              Node(45,
-                                                   Node(50,
-                                                        Node(53,
-                                                             Node(60,
-                                                                  Node(61,
-                                                                       Node(70,
-                                                                            Node(78))))))))))))))
-
-
-def descending_list():
-    return Node(70, Node(60, Node(50, Node(40, Node(30, Node(20, Node(10)))))))
+    mergeAscendingOrder, middle, mergeSort, isPalindrome, removeDuplicates
+from data_structures.linked_list.single_linked_list_test_data import random_list, ascending_list, descending_list, \
+    palindrome_list, combined_ascending_list, duplicate_list, another_ascending_list, non_duplicate_list
 
 
 class Test(unittest.TestCase):
@@ -111,6 +77,9 @@ class Test(unittest.TestCase):
         self.assertFalse(isPalindrome(Node(50)))
         self.assertFalse(isPalindrome(ascending_list()))
         self.assertTrue(isPalindrome(palindrome_list()))
+
+    def test_removeDuplicates(self):
+        self.assertTrue(equals(removeDuplicates(duplicate_list()), non_duplicate_list()))
 
 
 if __name__ == '__main__':

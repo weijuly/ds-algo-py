@@ -192,3 +192,30 @@ def isPalindrome(node):
             return False
         head = head.next
     return True
+
+
+def removeDuplicates(node):
+    if not node:
+        return node
+    head = curr = node
+    while curr:
+        prev, next = curr, curr.next
+        while next:
+            if curr.data == next.data:
+                prev.next = next.next
+            prev, next = next, next.next
+        curr = curr.next
+    return head
+
+
+def findLoop(node):
+    if not node or not node.next:
+        return False, None
+    slow = fast = node
+    while slow and fast:
+        if not slow.next or not fast.next or fast.next.next:
+            return False, None
+        slow, fast = slow.next, fast.next.next
+        if id(slow) == id(fast):
+            return True, slow
+
