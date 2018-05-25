@@ -10,7 +10,7 @@ Living snakes are found on every continent except Antarctica, and on most smalle
 Most species are nonvenomous and those that have venom use it primarily to kill and subdue prey rather than for self-defense. Some possess venom potent enough to cause painful injury or death to humans. Nonvenomous snakes either swallow prey alive or kill by constriction.
 '''
 
-NON_CHARACTERS = ['.', ',', '!', '?', '[', '{', '(', ')', '}', ']', ';']
+NON_CHARACTERS = '.,;:"-1234567890\'[](){}!?'
 
 
 class Dictionary:
@@ -20,10 +20,9 @@ class Dictionary:
     def clean(self, token):
         while token and token[-1] in NON_CHARACTERS:
             token = token[:-1]
-        if token and token[0] in NON_CHARACTERS:
-            token = token[1:]
-        if token and token[0] in '1234567890':
-            return ''
+        for i, x in enumerate(token):
+            if x in NON_CHARACTERS:
+                return token[:i]
         return token
 
     def addWord(self, dictionary, word):
@@ -35,11 +34,9 @@ class Dictionary:
         self.addWord(dictionary[word[0]], word[1:])
 
     def addText(self, text):
-        for line in text.split('\n'):
-            for token in line.split(' '):
-                word = self.clean(token)
-                if word != '':
-                    self.addWord(self.dictionary, word.lower())
+        words = [self.clean(token) for line in text.split('\n') for token in line.split(' ')]
+        for word in filter(lambda x: x != '', words):
+            self.addWord(self.dictionary, word)
 
     def contains(self, word, dictionary=None):
         if not dictionary:
@@ -56,4 +53,5 @@ class Test(unittest.TestCase):
         dictionary = Dictionary()
         dictionary.addText(sampleText)
         self.assertTrue(dictionary.contains('snakes'))
+        self.assertTrue(dictionary.contains('are'))
         self.assertFalse(dictionary.contains('gopi'))
