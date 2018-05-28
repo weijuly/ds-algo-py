@@ -2,7 +2,7 @@ import unittest
 
 from data_structures.linked_list.single_linked_list import Node, toString, getLength, getLengthRecursive, contains, \
     containsRecursive, findNthFromLast, isAscending, isDescending, reverse, equals, reverseRecursive, \
-    mergeAscendingOrder, middle, mergeSort, isPalindrome, removeDuplicates
+    mergeAscendingOrder, middle, mergeSort, isPalindrome, removeDuplicates, rotate
 from data_structures.linked_list.single_linked_list_test_data import random_list, ascending_list, descending_list, \
     palindrome_list, combined_ascending_list, duplicate_list, another_ascending_list, non_duplicate_list
 
@@ -80,6 +80,11 @@ class Test(unittest.TestCase):
 
     def test_removeDuplicates(self):
         self.assertTrue(equals(removeDuplicates(duplicate_list()), non_duplicate_list()))
+
+    def test_rotate(self):
+        self.assertIsNone(rotate(None, 0))
+        self.assertEqual(rotate(random_list(), 1).data, 45)
+        self.assertEqual(rotate(random_list(), 3).data, 6)
 
 
 if __name__ == '__main__':

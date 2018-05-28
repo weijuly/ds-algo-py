@@ -55,7 +55,7 @@ def findNthFromLast(node, n):
     while node and temp:
         node, temp = node.next, temp.next
     if node and not temp:
-        return node.data
+        return node
     return None
 
 
@@ -219,3 +219,15 @@ def findLoop(node):
         if id(slow) == id(fast):
             return True, slow
 
+
+def rotate(node, k):
+    if not node or not node.next:
+        return None
+    prev = findNthFromLast(node, k+1)
+    curr = prev.next
+    prev.next = None
+    head = curr
+    while curr.next:
+        curr = curr.next
+    curr.next = node
+    return head
