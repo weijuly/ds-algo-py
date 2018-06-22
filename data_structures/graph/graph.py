@@ -1,3 +1,4 @@
+import copy
 import sys
 
 
@@ -28,6 +29,20 @@ class Graph:
         outgoing = [(k[0], self.graph[k]) for k in self.graph.keys() if k[1] == vertex] if self.directed else []
         return sorted(incoming + outgoing)
 
+    def topologicalSort(self):
+        ordered = []
+        starts = list(set([k[0] for k in self.graph]) - set([k[1] for k in self.graph]))
+        graph = copy.deepcopy(self.graph)
+        while starts:
+            ordered.append(starts.pop())
+            curr = ordered[-1]
+            for path in [x for x in graph if x[0] == curr]:
+                end = path[1]
+                graph.pop(path)
+                if end not in [k[1] for k in graph]:
+                    starts.insert(0, end)
+        return ordered
+
     def shortestPath(self, source, target):
         if self.directed:
             if source not in [k[0] for k in self.graph.keys()]:
@@ -42,4 +57,3 @@ class Graph:
             distances[source] = 0
             current = source
             distances.pop(source)
-

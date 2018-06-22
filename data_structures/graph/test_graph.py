@@ -29,6 +29,31 @@ class TestDirectedAcyclicGraph(unittest.TestCase):
         self.assertListEqual(self.graph.adjacents('B'), [('D', 3), ('E', 2)])
         self.assertListEqual(self.graph.adjacents('D'), [('A', 2), ('B', 3), ('F', 3), ('G', 4)])
 
+    def test_topologicalSort(self):
+        graph = Graph(directed=True, cyclic=False)
+        graph.addEdge('5', '11', 1)
+        graph.addEdge('7', '11', 1)
+        graph.addEdge('7', '8', 1)
+        graph.addEdge('3', '8', 1)
+        graph.addEdge('3', '10', 1)
+        graph.addEdge('11', '2', 1)
+        graph.addEdge('11', '9', 1)
+        graph.addEdge('11', '10', 1)
+        graph.addEdge('8', '9', 1)
+        ordered = graph.topologicalSort()
+        self.assertTrue(ordered.index('5') < ordered.index('11'))
+        self.assertTrue(ordered.index('7') < ordered.index('11'))
+        self.assertTrue(ordered.index('3') < ordered.index('11'))
+        self.assertTrue(ordered.index('5') < ordered.index('8'))
+        self.assertTrue(ordered.index('7') < ordered.index('8'))
+        self.assertTrue(ordered.index('3') < ordered.index('8'))
+        self.assertTrue(ordered.index('11') < ordered.index('2'))
+        self.assertTrue(ordered.index('11') < ordered.index('9'))
+        self.assertTrue(ordered.index('11') < ordered.index('10'))
+        self.assertTrue(ordered.index('8') < ordered.index('2'))
+        self.assertTrue(ordered.index('8') < ordered.index('9'))
+        self.assertTrue(ordered.index('8') < ordered.index('10'))
+
 
 class TestNonDirectedAcyclicGraph(unittest.TestCase):
 
