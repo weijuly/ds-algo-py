@@ -2,7 +2,7 @@ import random
 import time
 import unittest
 
-from algorithms.sorts import insertion_sort, selection_sort, quick_sort, bubble_sort, merge_sort, bucket_sort
+from algorithms.sorts import insertion_sort, selection_sort, quick_sort, bubble_sort, merge_sort, bucket_sort,heap_sort
 
 
 def unsorted():
@@ -46,3 +46,6 @@ class Test(unittest.TestCase):
     def test_bucket_sort(self):
         self.assertListEqual(bucket_sort(unsorted()), sorted())
         measure_time(bucket_sort)
+    def test_heap_sort(self):
+        self.assertListEqual(bucket_sort(unsorted()), sorted())
+        measure_time(heap_sort)

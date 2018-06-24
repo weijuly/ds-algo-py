@@ -72,3 +72,26 @@ def bucket_sort(array):
     for x in sorted(bucket.keys()):
         result.extend(insertion_sort(bucket[x]))
     return result
+
+def makeheap(array,length,i):
+    largest = i
+    left = 2*i+1
+    right = 2*i+2
+    
+    if(left < length and array[largest] < array[left]):
+        largest = left
+    if(right < length and array[largest] < array[right]):
+        largest = right
+    if(largest != i):
+        array[largest],array[i] = array[i],array[largest]
+        makeheap(array,length,largest)
+
+def heap_sort(array):
+    
+    n = len(array)
+
+    for x in range(int(n/2-1),-1,-1):
+        makeheap(array,n,x)
+    for x in range(n-1,-1,-1):
+        array[0],array[x] = array[x],array[0]
+        makeheap(array,x,0)
