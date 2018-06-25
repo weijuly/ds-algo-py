@@ -47,5 +47,5 @@ class Test(unittest.TestCase):
         self.assertListEqual(bucket_sort(unsorted()), sorted())
         measure_time(bucket_sort)
     def test_heap_sort(self):
-        self.assertListEqual(bucket_sort(unsorted()), sorted())
+        self.assertListEqual(heap_sort(unsorted()), sorted())
         measure_time(heap_sort)
