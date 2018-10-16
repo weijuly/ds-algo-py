@@ -2,6 +2,16 @@ import random
 from collections import defaultdict
 
 
+
+
+#   sort        best    average     worst
+#   bubble      n       n^2         n^2
+#   insertion   n       n^2         n^2
+#   selection   n^2     n^2         n^2
+#   merge       nlogn   nlogn       nlogn
+#   heap        nlogn   nlogn       nlogn
+#   quick       nlogn   nlogn       n^2
+
 def insertion_sort(array):
     for i in range(1, len(array)):
         for j in range(i - 1, -1, -1):

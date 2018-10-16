@@ -192,4 +192,58 @@ def maxDepth(tree):
     return 1 + max([maxDepth(tree.left), maxDepth(tree.rite)])
 
 
+def elementsInLevel(tree, level):
+    if not tree or level < 1:
+        return []
+    if level == 1:
+        return [tree.data]
+    else:
+        return elementsInLevel(tree.left, level - 1) + elementsInLevel(tree.rite, level - 1)
+
+
+def elementsLevelOrder(tree):
+    if not tree:
+        return []
+    queue = []
+    queue.append(tree)
+    elems = []
+    while len(queue) > 0:
+        node = queue.pop(0)
+        elems.append(node.data)
+        if node.left:
+            queue.append(node.left)
+        if node.rite:
+            queue.append(node.rite)
+    return elems
+
+
+def pathToElement(tree, data):
+    if not tree:
+        return []
+    if tree.data == data:
+        return [data]
+    if tree.left:
+        path = pathToElement(tree.left, data)
+        if path and path[-1] == data:
+            return [tree.data] + path
+    if tree.rite:
+        path = pathToElement(tree.rite, data)
+        if path and path[-1] == data:
+            return [tree.data] + path
+    return []
+
+
+def lowestCommonAncestor(tree, x, y):
+    xpath = pathToElement(tree, x)
+    ypath = pathToElement(tree, y)
+    ancestor = None
+    while xpath and ypath:
+        if xpath[0] == ypath[0]:
+            ancestor = xpath[0]
+            xpath.pop(0)
+            ypath.pop(0)
+        else:
+            break
+    return ancestor
+
 

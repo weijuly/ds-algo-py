@@ -2,7 +2,8 @@ import unittest
 
 from data_structures.binary_trees.trees import Tree, isValidBSTRange, isValidBSTValue, maxTreeValue, minTreeValue, \
     mirror, equals, isSubTree, isHeightBalanced, inOrderTraverse, isMirror, preOrderTraverse, postOrderTraverse, \
-    insertInPlace, insertAndCopy, contains, deleteInPlace, clone, sortedArrayToBST, maxDepth
+    insertInPlace, insertAndCopy, contains, deleteInPlace, clone, sortedArrayToBST, maxDepth, elementsInLevel, \
+    elementsLevelOrder, pathToElement, lowestCommonAncestor
 
 
 def binary_search_tree():
@@ -37,6 +38,7 @@ def full_skewed_tree():
     tree.rite.rite.rite.rite = Tree(50)
     tree.rite.rite.rite.rite.rite = Tree(60)
     return tree
+
 
 def binary_search_tree_mirrored():
     tree = Tree(100)
@@ -149,6 +151,35 @@ class Test(unittest.TestCase):
         self.assertEqual(maxDepth(None), 0)
         self.assertEqual(maxDepth(full_skewed_tree()), 6)
 
+    def test_elementsInLevel(self):
+        tree = binary_search_tree()
+        self.assertEqual(elementsInLevel(tree, 0), [])
+        self.assertEqual(elementsInLevel(tree, 1), [100])
+        self.assertEqual(elementsInLevel(tree, 2), [50, 150])
+        self.assertEqual(elementsInLevel(tree, 3), [25, 75, 125, 175])
+        self.assertEqual(elementsInLevel(tree, 4), [])
+
+    def test_elementsLevelOrder(self):
+        tree = binary_search_tree()
+        self.assertEqual(elementsLevelOrder(tree), [100, 50, 150, 25, 75, 125, 175])
+
+    def test_pathToElement(self):
+        tree = binary_search_tree()
+        self.assertEqual(pathToElement(tree, 100), [100])
+        self.assertEqual(pathToElement(tree, 50), [100, 50])
+        self.assertEqual(pathToElement(tree, 25), [100, 50, 25])
+        self.assertEqual(pathToElement(tree, 75), [100, 50, 75])
+        self.assertEqual(pathToElement(tree, 175), [100, 150, 175])
+        self.assertEqual(pathToElement(tree, 300), [])
+
+
+    def test_lowestCommonAncestor(self):
+        tree = binary_search_tree()
+        self.assertIsNone(lowestCommonAncestor(tree, 1, 100))
+        self.assertEqual(lowestCommonAncestor(tree, 100, 100), 100)
+        self.assertEqual(lowestCommonAncestor(tree, 75, 25), 50)
+        self.assertEqual(lowestCommonAncestor(tree, 50, 175), 100)
+        self.assertEqual(lowestCommonAncestor(tree, 50, 25), 50)
 
 if __name__ == '__main__':
     unittest.main()
