@@ -1,20 +1,18 @@
 import random
 import sys
 import unittest
-from unittest import skip
 
 from data_structures.heaps.min_heap import insert, remove
 
 
 class Test(unittest.TestCase):
-    @skip("skip")
     def test_min_heap(self):
-        array = [random.randint(1, 1000) for x in range(100)]
-        heap = []
+        array = set([random.randint(1, 1000) for x in range(100)])
+        heap = None
         for x in array:
             heap = insert(heap, x)
-        M = sys.maxsize
-        while heap:
+        M = -sys.maxsize
+        while len(heap) > 2:
             m, heap = remove(heap)
-            self.assertTrue(m.data < M)
+            self.assertTrue(m.data > M)
             M = m.data
