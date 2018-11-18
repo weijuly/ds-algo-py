@@ -73,7 +73,6 @@ class Test(unittest.TestCase):
             [0, 0, 5, 0, 1, 0, 3, 0, 0]
         ]
         status, solution = solve(matrix)
-        print(solution)
         self.assertEqual(len(solution), 9)
         [self.assertEqual(len(x), 9) for x in solution]
         [self.assertSetEqual(set(x), POSSIBILITIES) for x in solution]

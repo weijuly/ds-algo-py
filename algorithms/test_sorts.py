@@ -55,8 +55,8 @@ class Test(unittest.TestCase):
     def test_quick_sort(self):
         self.assertListEqual(quick_sort(unsorted()), sorted())
         measure_time_random(quick_sort)
-        measure_time_sorted(quick_sort)
-        measure_time_reversed(quick_sort)
+        #measure_time_sorted(quick_sort)
+        #measure_time_reversed(quick_sort)
 
     def test_bubble_sort(self):
         self.assertListEqual(bubble_sort(unsorted()), sorted())

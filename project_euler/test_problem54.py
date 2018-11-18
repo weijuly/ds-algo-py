@@ -109,12 +109,10 @@ def winner(line):
     cards = line.split(' ')
     p1, p2 = 0, 0
     p1r, p2r = poker(cards[:5]), poker(cards[5:])
-    print(p1r, p2r)
     if p1r > p2r:
         p1 += 1
     else:
         p2 += 1
-    print(p1, p2)
 
 
 #winner('4D 6S 9H QH QC 3D 6D 7H QD QS')

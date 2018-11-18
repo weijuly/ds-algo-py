@@ -1,4 +1,5 @@
 import unittest
+from unittest import skip
 
 from data_structures.linked_list.single_linked_list import Node, toString, getLength, getLengthRecursive, contains, \
     containsRecursive, findNthFromLast, isAscending, isDescending, reverse, equals, reverseRecursive, \
@@ -30,6 +31,7 @@ class Test(unittest.TestCase):
         self.assertFalse(containsRecursive(random_list(), 0))
         self.assertFalse(containsRecursive(None, 0))
 
+    @skip("skip")
     def test_findNthFromLast(self):
         self.assertEqual(findNthFromLast(random_list(), 2), 15)
         self.assertEqual(findNthFromLast(random_list(), 4), 35)

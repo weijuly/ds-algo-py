@@ -55,8 +55,6 @@ class Test(unittest.TestCase):
 
     def test_permutations_of_length(self):
         y = permutations_of_length('ABCDE', 2)
-        print(y)
-        #print(permutations_of_length('ABCDE', 2))
 
 
 if __name__ == '__main__':
