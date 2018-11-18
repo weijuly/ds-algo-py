@@ -1,5 +1,3 @@
-import datetime
-import unittest
 from collections import defaultdict
 
 ROYAL_FLUSH_V = set('BCDEF')
@@ -119,4 +117,4 @@ def winner(line):
     print(p1, p2)
 
 
-winner('4D 6S 9H QH QC 3D 6D 7H QD QS')
+#winner('4D 6S 9H QH QC 3D 6D 7H QD QS')
