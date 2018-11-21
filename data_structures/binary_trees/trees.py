@@ -247,3 +247,25 @@ def lowestCommonAncestor(tree, x, y):
     return ancestor
 
 
+def left_view(tree, level=0, elements=None):
+    if elements is None:
+        elements = []
+    if not tree:
+        return elements
+    if len(elements) == level:
+        elements.append(tree.data)
+    left_view(tree.left, level + 1, elements)
+    left_view(tree.rite, level + 1, elements)
+    return elements
+
+
+def rite_view(tree, level=0, elements=None):
+    if elements is None:
+        elements = []
+    if not tree:
+        return elements
+    if len(elements) == level:
+        elements.append(tree.data)
+    rite_view(tree.rite, level + 1, elements)
+    rite_view(tree.left, level + 1, elements)
+    return elements

@@ -3,7 +3,7 @@ import unittest
 from data_structures.binary_trees.trees import Tree, isValidBSTRange, isValidBSTValue, maxTreeValue, minTreeValue, \
     mirror, equals, isSubTree, isHeightBalanced, inOrderTraverse, isMirror, preOrderTraverse, postOrderTraverse, \
     insertInPlace, insertAndCopy, contains, deleteInPlace, clone, sortedArrayToBST, maxDepth, elementsInLevel, \
-    elementsLevelOrder, pathToElement, lowestCommonAncestor
+    elementsLevelOrder, pathToElement, lowestCommonAncestor, left_view, rite_view
 
 
 def binary_search_tree():
@@ -172,7 +172,6 @@ class Test(unittest.TestCase):
         self.assertEqual(pathToElement(tree, 175), [100, 150, 175])
         self.assertEqual(pathToElement(tree, 300), [])
 
-
     def test_lowestCommonAncestor(self):
         tree = binary_search_tree()
         self.assertIsNone(lowestCommonAncestor(tree, 1, 100))
@@ -180,6 +179,15 @@ class Test(unittest.TestCase):
         self.assertEqual(lowestCommonAncestor(tree, 75, 25), 50)
         self.assertEqual(lowestCommonAncestor(tree, 50, 175), 100)
         self.assertEqual(lowestCommonAncestor(tree, 50, 25), 50)
+
+    def test_left_view(self):
+        self.assertEqual(left_view(binary_search_tree()), [100, 50, 25])
+        self.assertEqual(left_view(full_skewed_tree()), [10, 20, 30, 40, 50, 60])
+
+    def test_rite_view(self):
+        self.assertEqual(rite_view(binary_search_tree()), [100, 150, 125])
+        self.assertEqual(rite_view(full_skewed_tree()), [10, 20, 30, 40, 50, 60])
+
 
 if __name__ == '__main__':
     unittest.main()
