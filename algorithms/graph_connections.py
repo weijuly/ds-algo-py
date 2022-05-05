@@ -13,7 +13,7 @@ where (a, b) represents the connection from node[a] <=> node[b], check if there'
 
 
 class Graph01:
-    '''
+    """
     Using the approach of storing data element like this:
     {
         a: 1
@@ -33,7 +33,7 @@ class Graph01:
     timings:
         ~ 2.4 secs for adding 10k edges ( timeout for 100k )
         ~ 0 secs for checking 10k edges
-    '''
+    """
 
     def __init__(self):
         self.graph = {}
@@ -64,7 +64,7 @@ class Graph01:
 
 
 class Graph02:
-    '''
+    """
     Using the approach of storing data element like this:
     {
         1: [a, b, c, d, e, f]
@@ -80,7 +80,7 @@ class Graph02:
     timings:
         ~ 1.1 secs for adding 10k edges ( timeout for 100k )
         ~ 0.5 for checking 10k edges
-    '''
+    """
 
     def __init__(self):
         self.index = 0
@@ -107,7 +107,7 @@ class Graph02:
 
 
 class Graph03:
-    '''
+    """
         Store a lookup of both elements and indexes
         elements_to_index : { a: 1, b: 1, c: 2, d: 2 }
         index_to_elements : { 1: [a, b], 2: [c, d] }
@@ -119,7 +119,7 @@ class Graph03:
         performance:
             ~6 secs for adding 1M edges
             ~0.6 secs for checking 1M edges
-    '''
+    """
 
     def __init__(self):
         self.index_to_elements = {}
@@ -149,12 +149,47 @@ class Graph03:
 
     def connected(self, x, y):
         return self.elements_to_index.get(x, -1) == self.elements_to_index.get(y, -2)
-        pass
 
 
-DATA_SIZE = 10000
+class Graph04:
+    '''
+    Store the elements in a map including reverse lookup:
+    {
+        x: [a, b, c]
+        a: [x, b, c]
+        c: [x, a, b]
+    }
+    performance:
+        ~1.5 secs for adding 1M edges
+        ~11.5 secs for checking 1M edges
+    '''
+    def __init__(self):
+        self.graph = {}
 
-graph = Graph01()
+    def connect(self, x, y):
+        if x not in self.graph:
+            self.graph[x] = []
+        self.graph[x].append(y)
+        if y not in self.graph:
+            self.graph[y] = []
+        self.graph[y].append(x)
+
+    def _connected(self, x, y, exclusions):
+        if x not in self.graph:
+            return False
+        if y in self.graph[x]:
+            return True
+        for c in [e for e in self.graph[x] if e not in exclusions]:
+            return self._connected(c, y, exclusions + [x])
+        return False
+
+    def connected(self, x, y):
+        return self._connected(x, y, [])
+
+
+DATA_SIZE = 1000000
+
+graph = Graph03()
 edges = [[random.randint(1, DATA_SIZE), random.randint(1, DATA_SIZE)] for x in range(DATA_SIZE)]
 start = time.perf_counter()
 for edge in edges:
@@ -162,6 +197,7 @@ for edge in edges:
 end = time.perf_counter()
 print('Time for connect is %f secs' % (end - start))
 
+edges = [[random.randint(1, DATA_SIZE), random.randint(1, DATA_SIZE)] for x in range(DATA_SIZE)]
 start = time.perf_counter()
 for edge in edges:
     graph.connected(edge[0], edge[1])
