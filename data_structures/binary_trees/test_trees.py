@@ -3,7 +3,8 @@ import unittest
 from data_structures.binary_trees.trees import Tree, isValidBSTRange, isValidBSTValue, maxTreeValue, minTreeValue, \
     mirror, equals, isSubTree, isHeightBalanced, inOrderTraverse, isMirror, preOrderTraverse, postOrderTraverse, \
     insertInPlace, insertAndCopy, contains, deleteInPlace, clone, sortedArrayToBST, maxDepth, elementsInLevel, \
-    elementsLevelOrder, pathToElement, lowestCommonAncestor, left_view, rite_view
+    elementsLevelOrder, pathToElement, lowestCommonAncestor, left_view, rite_view, inOrderTraverseStack, \
+    elementsLevelOrderGrouped
 
 
 def binary_search_tree():
@@ -106,6 +107,9 @@ class Test(unittest.TestCase):
     def test_inOrderTraverse(self):
         self.assertEqual(inOrderTraverse(binary_search_tree()), [25, 50, 75, 100, 125, 150, 175])
 
+    def test_inOrderTraverseStack(self):
+        self.assertEqual(inOrderTraverseStack(binary_search_tree()), [25, 50, 75, 100, 125, 150, 175])
+
     def test_preOrderTraverse(self):
         self.assertEqual(preOrderTraverse(binary_search_tree()), [100, 50, 25, 75, 150, 125, 175])
 
@@ -162,6 +166,10 @@ class Test(unittest.TestCase):
     def test_elementsLevelOrder(self):
         tree = binary_search_tree()
         self.assertEqual(elementsLevelOrder(tree), [100, 50, 150, 25, 75, 125, 175])
+
+    def test_elementsLevelOrderGrouped(self):
+        tree = binary_search_tree()
+        self.assertEqual(elementsLevelOrderGrouped(tree), [[100], [50, 150], [25, 75, 125, 175]])
 
     def test_pathToElement(self):
         tree = binary_search_tree()

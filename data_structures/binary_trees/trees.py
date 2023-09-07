@@ -102,6 +102,23 @@ def inOrderTraverse(tree, array=[]):
     return array
 
 
+def inOrderTraverseStack(tree):
+    if not tree:
+        return []
+    stack, array, curr = [], [], tree
+    while True:
+        if curr:
+            stack.append(curr)
+            curr = curr.left
+        else:
+            curr = stack.pop()
+            array.append(curr.data)
+            curr = curr.rite
+        if not stack and not curr:
+            break
+    return array
+
+
 def preOrderTraverse(tree, array=[]):
     if tree:
         array.append(tree.data)
@@ -215,6 +232,20 @@ def elementsLevelOrder(tree):
         if node.rite:
             queue.append(node.rite)
     return elems
+
+def elementsLevelOrderGrouped(tree):
+    def inner(tree, level, group):
+        if not tree:
+            return group
+        if level not in group:
+            group[level] = []
+        group[level].append(tree.data)
+        inner(tree.left, level + 1, group)
+        inner(tree.rite, level + 1, group)
+        return group
+    group = inner(tree, 0, {})
+    return [group[k] for k in sorted(group.keys())]
+
 
 
 def pathToElement(tree, data):
